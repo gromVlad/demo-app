@@ -4,8 +4,8 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./demo/demo.component').then(
-        (m) => m.DemoComponent
+      import('./features/tasks/components/task-list/task-list.component').then(
+        (m) => m.TaskListComponent
       ),
   },
 ];

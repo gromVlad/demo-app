@@ -1,0 +1,15 @@
+<div *ngIf="isLoading$ | async">
+  <p>Loading...</p>
+</div>
+
+<div *ngIf="error$ | async as error">
+  <p>{{ error }}</p>
+</div>
+
+<div *ngIf="tasks$ | async as tasks">
+  <ul>
+    <li *ngFor="let task of tasks">
+      {{ task.title }} - {{ task.description }} - {{ task.deadline }} - {{ task.priority }} - {{ task.status }} - {{ task.performers }}
+    </li>
+  </ul>
+</div>

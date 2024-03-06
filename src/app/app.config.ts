@@ -6,6 +6,8 @@ import { provideRouter } from "@angular/router";
 import { provideStore } from "@ngrx/store";
 import { routes } from './app.routes';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { GetTasksEffect } from './features/tasks/store/effects/getTasks.effect';
+import { tasksReducer } from './features/tasks/store/redusers';
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,9 +15,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore({
       router: routerReducer,
+      tasks: tasksReducer,
     }),
     provideStoreDevtools({ maxAge: 20, logOnly: !isDevMode() }),
-    provideEffects(),
+    provideEffects(GetTasksEffect),
     provideHttpClient(withInterceptors([])),
     provideRouterStore(),
   ],
