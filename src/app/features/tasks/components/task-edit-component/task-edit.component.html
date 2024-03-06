@@ -1,0 +1,16 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="status">Status:</label>
+    <select id="status" formControlName="status">
+      <option value="new">New</option>
+      <option value="in progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+  </div>
+  <div>
+    <label for="performers">Performers:</label>
+    <input type="text" id="performers" formControlName="performers">
+  </div>
+
+  <button type="submit">Update Task</button>
+</form>

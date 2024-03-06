@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
-import { TasksInterface } from "../model/tasks.model";
-import { Observable, of } from "rxjs";
+import { Injectable } from '@angular/core';
+import { TasksInterface } from '../model/tasks.model';
+import { Observable, map, of, tap } from 'rxjs';
+import { TaskInterface } from 'app/shared/services/model/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,43 @@ export class StorageService {
     }
   }
 
+  createTask(task: TaskInterface): Observable<TaskInterface> {
+    let tasks: TasksInterface = [];
+
+    this.getTasks().subscribe((res) => {
+      tasks = res;
+    });
+    tasks.push(task);
+    this.saveTasks(tasks);
+
+    return of(task);
+  }
+
   saveTasks(tasks: TasksInterface): void {
     localStorage.setItem(this.tasksKey, JSON.stringify(tasks));
+  }
+
+  updateTask(task: TaskInterface): Observable<TaskInterface> {
+    return this.getTasks().pipe(
+      map((tasks) => {
+        const index = tasks.findIndex((t) => t.id === task.id);
+        if (index !== -1) {
+          tasks[index] = task;
+        }
+        return tasks;
+      }),
+      tap((updatedTasks) => this.saveTasks(updatedTasks)),
+      map(() => task)
+    );
+  }
+
+  getTaskById(id: string): Observable<TaskInterface | null> {
+
+    return this.getTasks().pipe(
+      map((tasks) => {
+        const task = tasks.find((task) => task.id === +id);
+        return task ? task : null;
+      })
+    );
   }
 }

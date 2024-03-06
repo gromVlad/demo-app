@@ -8,6 +8,9 @@ import { routes } from './app.routes';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { GetTasksEffect } from './features/tasks/store/effects/getTasks.effect';
 import { tasksReducer } from './features/tasks/store/redusers';
+import { CreateTaskEffect } from './features/tasks/store/effects/addTask.effect';
+import { UpdateTaskEffect } from './features/tasks/store/effects/updateTask.effect';
+import { GetTaskByIdEffect } from './features/tasks/store/effects/getTaskById.effect';
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +21,12 @@ export const appConfig: ApplicationConfig = {
       tasks: tasksReducer,
     }),
     provideStoreDevtools({ maxAge: 20, logOnly: !isDevMode() }),
-    provideEffects(GetTasksEffect),
+    provideEffects(
+      GetTasksEffect,
+      CreateTaskEffect,
+      UpdateTaskEffect,
+      GetTaskByIdEffect
+    ),
     provideHttpClient(withInterceptors([])),
     provideRouterStore(),
   ],
