@@ -11,6 +11,11 @@ export class TaskPerformerFilterPipe implements PipeTransform {
       return tasks;
     }
 
-    return tasks.filter((task) => task.performers.includes(performer));
+    const performerLowerCase = performer.toLowerCase();
+
+    return tasks.filter((task) => {
+      return task.performers.some((taskPerformer) => taskPerformer.toLowerCase().includes(performerLowerCase));
+    });
+
   }
 }

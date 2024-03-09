@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TaskSortFilterService } from '../../services/sortAndFilter.service';
+import { TaskSortFilterForm } from 'app/shared/model/taskSortFilterForm.model';
 
 @Component({
   selector: 'app-task-sort-filter',
@@ -18,8 +19,8 @@ export class TaskSortFilterComponent implements OnInit {
 
   statusSortOptions = [
     { label: 'None', value: '' },
-    { label: 'Ascending', value: 'statusAsc' },
-    { label: 'Descending', value: 'statusDesc' },
+    { label: 'Ascending', value: 'asc' },
+    { label: 'Descending', value: 'desc' },
   ];
 
   statusFilterOptions = [
@@ -31,14 +32,23 @@ export class TaskSortFilterComponent implements OnInit {
 
   performerSortOptions = [
     { label: 'None', value: '' },
-    { label: 'Ascending', value: 'performerAsc' },
-    { label: 'Descending', value: 'performerDesc' },
+    { label: 'Ascending', value: 'asc' },
+    { label: 'Descending', value: 'desc' },
   ];
 
   deadlineSortOptions = [
     { label: 'None', value: '' },
-    { label: 'Ascending', value: 'deadlineAsc' },
-    { label: 'Descending', value: 'deadlineDesc' },
+    { label: 'Ascending', value: 'asc' },
+    { label: 'Descending', value: 'desc' },
+  ];
+
+  deadlineFilterOptions = [
+    { label: 'All', value: '' },
+    { label: 'Today', value: 'today' },
+    { label: 'Tomorrow', value: 'tomorrow' },
+    { label: 'This week', value: 'this week' },
+    { label: 'More weeks', value: 'more weeks' },
+    { label: 'overdue', value: 'overdue' },
   ];
 
   ngOnInit(): void {
@@ -52,12 +62,14 @@ export class TaskSortFilterComponent implements OnInit {
       performerSort: [''],
       performerInputFilter: [''],
       deadlineSort: [''],
-      deadlineInputFilter: [''],
+      deadlineFilter: [''],
     });
 
-    this.taskSortFilterService.getData().subscribe((data) => {
-      this.form.patchValue(data);
-    });
+    this.taskSortFilterService
+      .getData()
+      .subscribe((data: TaskSortFilterForm) => {
+        this.form.patchValue(data);
+      });
   }
 
   onSubmit(): void {

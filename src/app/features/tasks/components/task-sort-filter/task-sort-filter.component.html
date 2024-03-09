@@ -11,10 +11,12 @@
     <label for="performer-input-filter">Filter by performer input:</label>
     <input id="performer-input-filter" type="text" formControlName="performerInputFilter">
   </div>
-  <div>
-    <label for="deadline-input-filter">Filter by deadline input:</label>
-    <input id="deadline-input-filter" type="date" formControlName="deadlineInputFilter">
-  </div>
+ <label for="deadline-filter">Filter by deadline:</label>
+    <select id="deadline-filter" formControlName="deadlineFilter">
+      <option *ngFor="let option of deadlineFilterOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
 
   <div>
     <label for="status-sort">Sort by status:</label>

@@ -1,21 +1,36 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { TasksInterface } from 'app/features/tasks/model/tasks.model';
+import { Pipe, PipeTransform } from "@angular/core";
+import { TasksInterface } from "app/features/tasks/model/tasks.model";
+
 
 @Pipe({
   name: 'taskPerformerSort',
   standalone: true,
 })
 export class TaskPerformerSortPipe implements PipeTransform {
-  transform(tasks: TasksInterface): TasksInterface {
-    if (!tasks) {
-      return tasks;
+  transform(
+    tasks: TasksInterface,
+    sortOrder: 'asc' | 'desc'
+  ): TasksInterface {
+    let copyTask = [...tasks]
+
+    if (!copyTask) {
+      return copyTask;
     }
 
-    return tasks.sort((a, b) => {
-      const aPerformers = a.performers.join(',');
-      const bPerformers = b.performers.join(',');
+    return copyTask.sort((a, b) => {
+      const aPerformers = a.performers
+        .map((performer) => performer.toLowerCase())
+        .sort();
+      const bPerformers = b.performers
+        .map((performer) => performer.toLowerCase())
+        .sort();
 
-      return aPerformers.localeCompare(bPerformers);
+      if (sortOrder === 'asc') {
+        return aPerformers.join(',') > bPerformers.join(',') ? 1 : -1;
+      } else {
+        return bPerformers.join(',') > aPerformers.join(',') ? 1 : -1;
+      }
     });
+
   }
 }

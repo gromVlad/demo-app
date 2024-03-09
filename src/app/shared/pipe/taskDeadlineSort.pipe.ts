@@ -6,11 +6,22 @@ import { TasksInterface } from 'app/features/tasks/model/tasks.model';
   standalone: true,
 })
 export class TaskDeadlineSortPipe implements PipeTransform {
-  transform(tasks: TasksInterface): TasksInterface {
-    if (!tasks) {
-      return tasks;
+  transform(
+    tasks: TasksInterface,
+    sortOrder: 'asc' | 'desc'
+  ): TasksInterface {
+    let copyTask = [...tasks];
+
+    if (!copyTask) {
+      return copyTask;
     }
 
-    return tasks.sort((a, b) => a.deadline.getTime() - b.deadline.getTime());
+    return copyTask.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+      } else {
+        return new Date(b.deadline).getTime() - new Date(a.deadline).getTime();
+      }
+    });
   }
 }

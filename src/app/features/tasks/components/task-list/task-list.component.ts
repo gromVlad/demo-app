@@ -15,6 +15,12 @@ import { TaskInterface } from 'app/shared/model/task.model';
 import { TaskEditComponent } from '../task-edit-component/task-edit.component';
 import { TaskSortFilterService } from '../../services/sortAndFilter.service';
 import { TaskStatusFilterPipe } from 'app/shared/pipe/taskStatusFilter.pipe';
+import { TaskPerformerFilterPipe } from 'app/shared/pipe/taskPerformerFilter.pipe';
+import { TaskDeadlineFilterPipe } from 'app/shared/pipe/taskDeadlineFilter.pipe';
+import { TaskPerformerSortPipe } from 'app/shared/pipe/taskPerformerSort.pipe';
+import { TaskDeadlineSortPipe } from 'app/shared/pipe/taskDeadlineSort.pipe';
+import { TaskStatusSortPipe } from 'app/shared/pipe/taskStatusSort.pipe';
+import { TaskSortFilterForm } from 'app/shared/model/taskSortFilterForm.model';
 
 @Component({
   selector: 'app-task-list',
@@ -24,6 +30,11 @@ import { TaskStatusFilterPipe } from 'app/shared/pipe/taskStatusFilter.pipe';
     TaskEditComponent,
     RouterModule,
     TaskStatusFilterPipe,
+    TaskPerformerFilterPipe,
+    TaskDeadlineFilterPipe,
+    TaskPerformerSortPipe,
+    TaskDeadlineSortPipe,
+    TaskStatusSortPipe,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
@@ -36,7 +47,7 @@ export class TaskListComponent implements OnInit, OnDestroy {
   tasks$!: Observable<TasksInterface>;
   isLoading$!: Observable<boolean>;
   error$!: Observable<string | null>;
-  paramsFilterAndSortTasks: any;
+  paramsFilterAndSortTasks!: TaskSortFilterForm;
   paramsFilterAndSortSubject!: Subscription;
 
   ngOnInit(): void {

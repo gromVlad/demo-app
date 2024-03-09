@@ -6,11 +6,29 @@ import { TasksInterface } from 'app/features/tasks/model/tasks.model';
   standalone: true,
 })
 export class TaskStatusSortPipe implements PipeTransform {
-  transform(tasks: TasksInterface): TasksInterface {
-    if (!tasks) {
+  transform(
+    tasks: TasksInterface,
+    sortOrder: 'asc' | 'desc'
+  ): TasksInterface {
+    let copyTask = [...tasks];
+
+    if (!copyTask) {
       return tasks;
     }
 
-    return tasks.sort((a, b) => a.status.localeCompare(b.status));
+    return copyTask.sort((a, b) => {
+      const aStatusOrder = ['new', 'in progress', 'completed'].indexOf(
+        a.status
+      );
+      const bStatusOrder = ['new', 'in progress', 'completed'].indexOf(
+        b.status
+      );
+
+      if (sortOrder === 'asc') {
+        return aStatusOrder - bStatusOrder;
+      } else {
+        return bStatusOrder - aStatusOrder;
+      }
+    });
   }
 }
