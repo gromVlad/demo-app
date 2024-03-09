@@ -4,7 +4,7 @@ import { StorageService } from "../../services/task.service";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { createTaskAction, createTaskFailureAction, createTaskSuccessAction } from "../actions/addTask.actions";
 import { of } from "rxjs";
-import { TaskInterface } from "app/shared/services/model/task.model";
+import { TaskInterface } from "app/shared/model/task.model";
 
 
 @Injectable()

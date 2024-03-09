@@ -8,7 +8,8 @@
 
 <div *ngIf="tasks$ | async as tasks">
   <ul>
-    <li *ngFor="let task of tasks">
+    <li *ngFor="let task of tasks | taskStatusFilter:paramsFilterAndSortTasks.statusFilter
+">
       {{ task.title }} - {{ task.description }} - {{ task.deadline }} - {{ task.priority }} - {{ task.status }} - {{ task.performers }}
       <a [routerLink]="['/task', task.id]">View</a>
       <button (click)="editTask(task)">Edit</button>

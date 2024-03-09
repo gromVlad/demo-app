@@ -1,1 +1,26 @@
-<p>task-detail works!</p>
+<div *ngIf="task$ | async as task" class="task-detail">
+  <div class="task-detail__header">
+    <h1>{{ task?.title }}</h1>
+    <p>{{ task?.description }}</p>
+  </div>
+  <div class="task-detail__body">
+    <div class="task-detail__deadline">
+      <span>Deadline:</span>
+      <span>{{ task?.deadline | date }}</span>
+    </div>
+    <div class="task-detail__priority">
+      <span>Priority:</span>
+      <span>{{ task?.priority }}</span>
+    </div>
+    <div class="task-detail__status">
+      <span>Status:</span>
+      <span>{{ task?.status }}</span>
+    </div>
+    <div class="task-detail__performers">
+      <span>Performers:</span>
+      <ul>
+        <li *ngFor="let performer of task?.performers">{{ performer }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

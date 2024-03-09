@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { ActionTypes } from "../actions.module";
-import { TaskInterface } from "app/shared/services/model/task.model";
+import { TaskInterface } from "app/shared/model/task.model";
 
 export const getTaskByIdAction = createAction(
   ActionTypes.GET_TASKS_BY_ID,
@@ -9,7 +9,7 @@ export const getTaskByIdAction = createAction(
 
 export const getTaskByIdSuccessAction = createAction(
   ActionTypes.GET_TASKS_BY_ID_SUCCESS,
-  props<{ task: TaskInterface  | null}>()
+  props<{ task: TaskInterface}>()
 );
 
 export const getTaskByIdFailureAction = createAction(

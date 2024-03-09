@@ -11,7 +11,8 @@ export const ActionTypes = {
   UPDATE_TASK_SUCCESS: '[TASKS] Update task success',
   UPDATE_TASK_FAILURE: '[TASKS] Update task failure',
 
-  GET_TASKS_BY_ID: '[TASKS] Get tasks id',
-  GET_TASKS_BY_ID_SUCCESS: '[TASKS] Get tasks id success',
-  GET_TASKS_BY_ID_FAILURE: '[TASKS] Get tasksByid failure',
+  GET_TASKS_BY_ID: '[TASKS] Get tasksId',
+  GET_TASKS_BY_ID_SUCCESS: '[TASKS] Get tasksId success',
+  GET_TASKS_BY_ID_FAILURE: '[TASKS] Get tasksId failure',
+
 };

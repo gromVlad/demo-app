@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { TasksInterface } from "../model/tasks.model";
-import { TasksStateInterface } from "app/shared/services/model/tasksState.model";
+import { TasksStateInterface } from "app/shared/model/tasksState.model";
 
 
 export interface AppStateInterface {
@@ -24,3 +24,9 @@ export const tasksSelector = createSelector(
   selectFeature,
   (tasksState: TasksStateInterface) => tasksState.data
 );
+
+export const taskSelector = createSelector(
+  selectFeature,
+  (tasksState: TasksStateInterface) => tasksState.currentTask
+);
+

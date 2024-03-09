@@ -11,6 +11,7 @@ import { tasksReducer } from './features/tasks/store/redusers';
 import { CreateTaskEffect } from './features/tasks/store/effects/addTask.effect';
 import { UpdateTaskEffect } from './features/tasks/store/effects/updateTask.effect';
 import { GetTaskByIdEffect } from './features/tasks/store/effects/getTaskById.effect';
+import { TaskStatusFilterPipe } from './shared/pipe/taskStatusFilter.pipe';
 
 
 export const appConfig: ApplicationConfig = {

@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { TaskInterface } from 'app/shared/services/model/task.model';
 import { AppStateInterface } from '../../store/selectors';
 import { CommonModule } from '@angular/common';
 import { createTaskAction } from '../../store/actions/addTask.actions';
+import { TaskInterface } from 'app/shared/model/task.model';
 
 @Component({
   selector: 'app-task-form',
@@ -37,6 +37,7 @@ export class TaskFormComponent {
         id: new Date().getTime(),
         priority: +this.taskForm.value['priority'],
         performers: this.taskForm.value['performers'].split(','),
+        deadline: new Date(this.taskForm.value['deadline']),
       };
 
       this.store.dispatch(createTaskAction({ task }));

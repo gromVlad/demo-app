@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { StorageService } from "../../services/task.service";
 import { updateTaskAction, updateTaskFailureAction, updateTaskSuccessAction } from "../actions/updateTask.action";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { TaskInterface } from "app/shared/services/model/task.model";
+import { TaskInterface } from "app/shared/model/task.model";
 import { of } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 

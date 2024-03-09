@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { TaskInterface } from 'app/shared/services/model/task.model';
+import { TaskInterface } from 'app/shared/model/task.model';
 import { AppStateInterface } from '../../store/selectors';
 import { updateTaskAction } from '../../store/actions/updateTask.action';
 

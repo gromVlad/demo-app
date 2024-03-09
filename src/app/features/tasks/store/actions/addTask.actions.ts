@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { ActionTypes } from "../actions.module";
-import { TaskInterface } from "app/shared/services/model/task.model";
+import { TaskInterface } from "app/shared/model/task.model";
 
 export const createTaskAction = createAction(
   ActionTypes.CREATE_TASK,

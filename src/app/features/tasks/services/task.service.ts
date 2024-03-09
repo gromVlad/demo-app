@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TasksInterface } from '../model/tasks.model';
-import { Observable, map, of, tap } from 'rxjs';
-import { TaskInterface } from 'app/shared/services/model/task.model';
+import { Observable, filter, map, of, tap } from 'rxjs';
+import { TaskInterface } from 'app/shared/model/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class StorageService {
           id: 1,
           title: 'Task 1',
           description: 'Description for task 1',
-          deadline: new Date(),
+          deadline: new Date('2024-03-13'),
           priority: 1,
           status: 'new',
           performers: ['John Doe'],
@@ -31,7 +31,7 @@ export class StorageService {
           id: 2,
           title: 'Task 2',
           description: 'Description for task 2',
-          deadline: new Date(),
+          deadline: new Date('2024-03-12'),
           priority: 2,
           status: 'in progress',
           performers: ['Jane Doe'],
@@ -40,7 +40,7 @@ export class StorageService {
           id: 3,
           title: 'Task 3',
           description: 'Description for task 3',
-          deadline: new Date(),
+          deadline: new Date('2029-04-12'),
           priority: 3,
           status: 'completed',
           performers: ['John Doe', 'Jane Doe'],
@@ -82,13 +82,15 @@ export class StorageService {
     );
   }
 
-  getTaskById(id: string): Observable<TaskInterface | null> {
-
+  getTaskById(id: string): Observable<TaskInterface> {
     return this.getTasks().pipe(
-      map((tasks) => {
-        const task = tasks.find((task) => task.id === +id);
-        return task ? task : null;
-      })
+      map((tasks: TasksInterface) =>
+        tasks.find((task: TaskInterface) => task.id === +id)
+      ),
+      filter(
+        (task: TaskInterface | undefined): task is TaskInterface =>
+          task !== undefined
+      )
     );
   }
 }

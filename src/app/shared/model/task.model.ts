@@ -3,7 +3,7 @@ export interface TaskInterface {
   title: string;
   description: string;
   deadline: Date;
-  priority: number;
-  status: string;
+  priority: 1 | 2 | 3;
+  status: 'new' | 'in progress' | 'completed';
   performers: string[];
 }

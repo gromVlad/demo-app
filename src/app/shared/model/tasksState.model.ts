@@ -5,5 +5,5 @@ export interface TasksStateInterface {
   data: TasksInterface;
   isLoading: boolean;
   error: null | string;
-  currentTask: null | TaskInterface ;
+  currentTask: null | TaskInterface;
 };

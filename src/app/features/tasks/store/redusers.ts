@@ -1,6 +1,5 @@
-import { TaskInterface } from './../../../shared/services/model/task.model';
 import { createReducer, on } from '@ngrx/store';
-import { TasksStateInterface } from 'app/shared/services/model/tasksState.model';
+import { TasksStateInterface } from 'app/shared/model/tasksState.model';
 import {
   getTasksAction,
   getTasksFailureAction,
@@ -22,7 +21,7 @@ const initialState: TasksStateInterface = {
   data: [],
   isLoading: false,
   error: null,
-  сurrentTask: null,
+  currentTask: null
 };
 
 export const tasksReducer = createReducer(
@@ -99,7 +98,7 @@ export const tasksReducer = createReducer(
     getTaskByIdAction,
     (state): TasksStateInterface => ({
       ...state,
-      isLoading: true
+      isLoading: true,
     })
   ),
   on(
@@ -116,5 +115,5 @@ export const tasksReducer = createReducer(
       ...state,
       isLoading: false,
     })
-  )
+  ),
 );

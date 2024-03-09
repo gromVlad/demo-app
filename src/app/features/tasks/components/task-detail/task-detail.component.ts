@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { TaskInterface } from 'app/shared/services/model/task.model';
+import { TaskInterface } from 'app/shared/model/task.model';
 import { Observable } from 'rxjs';
-import { AppStateInterface } from '../../store/selectors';
+import { AppStateInterface, taskSelector } from '../../store/selectors';
+import { getTaskByIdAction } from '../../store/actions/getTaskById.actions';
 
 @Component({
   selector: 'app-task-detail',
@@ -25,13 +26,13 @@ export class TaskDetailComponent {
   }
 
   initializeValues(): void {
-    //this.task$ = this.store.select(tasksSelector);
+    this.task$ = this.store.select(taskSelector);
   }
 
   fetchData(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      //this.store.dispatch(getTaskByIdAction({ id }));
+      this.store.dispatch(getTaskByIdAction({ id }));
     });
   }
 }
