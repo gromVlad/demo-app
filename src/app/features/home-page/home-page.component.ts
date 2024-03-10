@@ -16,6 +16,7 @@ export class HomePageComponent implements OnInit {
   private router = inject(Router);
   dataNow!: Date;
 
+
   taskWindow!: boolean;
 
   ngOnInit(): void {
