@@ -28,13 +28,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit, OnDestroy {
-  private fb = inject(FormBuilder);
-  private store = inject(Store<AppStateInterface>);
-  private generateUniqueId = inject(GenerateUniqueId);
-  private windowService = inject(WindowService);
-  private subscription!: Subscription;
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store<AppStateInterface>);
+  private readonly generateUniqueId = inject(GenerateUniqueId);
+  private readonly windowService = inject(WindowService);
 
-  taskWindow!: boolean
+  private  subscription!: Subscription;
+  taskWindow!: boolean;
   taskForm!: FormGroup;
 
   ngOnInit(): void {

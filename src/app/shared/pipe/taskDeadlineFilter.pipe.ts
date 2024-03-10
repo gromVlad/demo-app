@@ -35,11 +35,6 @@ export class TaskDeadlineFilterPipe implements PipeTransform {
           const taskDate = new Date(task.deadline);
           return taskDate >= today && taskDate < thisWeek;
         });
-      case 'next week':
-        return tasks.filter((task) => {
-          const taskDate = new Date(task.deadline);
-          return taskDate >= nextWeek;
-        });
       case 'overdue':
         return tasks.filter((task) => {
           const taskDate = new Date(task.deadline);

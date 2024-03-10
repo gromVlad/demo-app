@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterModule, RouterOutlet } from "@angular/router";
-import { Store } from "@ngrx/store";
 import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from "@angular/material/list";

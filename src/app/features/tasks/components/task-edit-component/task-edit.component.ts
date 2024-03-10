@@ -27,15 +27,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
   styleUrl: './task-edit.component.scss',
 })
 export class TaskEditComponent implements OnInit, OnDestroy {
-  private fb = inject(FormBuilder);
-  private store = inject(Store<AppStateInterface>);
-  private windowService = inject(WindowService);
-  private subscription!: Subscription;
+  private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store<AppStateInterface>);
+  private readonly windowService = inject(WindowService);
 
   @Input() task!: TaskInterface;
-
   taskForm!: FormGroup;
   taskWindow!: boolean;
+  private subscription!: Subscription;
 
   ngOnInit(): void {
     this.initializeValues();

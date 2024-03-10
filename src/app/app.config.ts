@@ -12,7 +12,6 @@ import { CreateTaskEffect } from './features/tasks/store/effects/addTask.effect'
 import { UpdateTaskEffect } from './features/tasks/store/effects/updateTask.effect';
 import { GetTaskByIdEffect } from './features/tasks/store/effects/getTaskById.effect';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [

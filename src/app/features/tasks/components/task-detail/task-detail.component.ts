@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TaskInterface } from 'app/shared/model/task.model';
@@ -17,14 +17,14 @@ import { SpinnerComponent } from 'app/shared/components/spinner/spinner.componen
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })
-export class TaskDetailComponent {
-  isLoading$!: Observable<boolean>;
-  error$!: Observable<string | null>;
-  private store = inject(Store<AppStateInterface>);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+export class TaskDetailComponent implements OnInit {
+  private readonly store = inject(Store<AppStateInterface>);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   task$!: Observable<TaskInterface | null>;
+  isLoading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
 
   ngOnInit(): void {
     this.initializeValues();
@@ -35,7 +35,6 @@ export class TaskDetailComponent {
     this.isLoading$ = this.store.select(isLoadingSelector);
     this.error$ = this.store.select(errorSelector);
     this.task$ = this.store.select(taskSelector);
-    console.log(this.task$);
   }
 
   fetchData(): void {

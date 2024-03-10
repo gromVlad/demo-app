@@ -1,5 +1,4 @@
 import { MatListModule } from '@angular/material/list';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -60,8 +59,9 @@ import { SpinnerComponent } from 'app/shared/components/spinner/spinner.componen
   styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent implements OnInit, OnDestroy {
-  private store = inject(Store<AppStateInterface>);
-  private taskSortFilterService = inject(TaskSortFilterService);
+  private readonly store = inject(Store<AppStateInterface>);
+  private readonly taskSortFilterService = inject(TaskSortFilterService);
+  private readonly windowService = inject(WindowService);
 
   selectedTask!: TaskInterface | null;
   tasks$!: Observable<TasksInterface>;
@@ -69,7 +69,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
   error$!: Observable<string | null>;
   paramsFilterAndSortTasks!: TaskSortFilterForm;
   paramsFilterAndSortSubject!: Subscription;
-  private windowService = inject(WindowService);
 
   taskWindow!: boolean;
 

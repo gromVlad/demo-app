@@ -1,5 +1,4 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { TasksInterface } from "../model/tasks.model";
+import { createSelector } from "@ngrx/store";
 import { TasksStateInterface } from "app/shared/model/tasksState.model";
 
 

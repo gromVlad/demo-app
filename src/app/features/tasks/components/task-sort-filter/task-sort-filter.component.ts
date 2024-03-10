@@ -23,8 +23,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './task-sort-filter.component.scss',
 })
 export class TaskSortFilterComponent implements OnInit {
-  private fb = inject(FormBuilder);
-  private taskSortFilterService = inject(TaskSortFilterService);
+  private readonly fb = inject(FormBuilder);
+  private readonly taskSortFilterService = inject(TaskSortFilterService);
 
   form!: FormGroup;
 
@@ -58,7 +58,6 @@ export class TaskSortFilterComponent implements OnInit {
     { label: 'Today', value: 'today' },
     { label: 'Tomorrow', value: 'tomorrow' },
     { label: 'This week', value: 'this week' },
-    { label: 'More weeks', value: 'more weeks' },
     { label: 'overdue', value: 'overdue' },
   ];
 
@@ -91,7 +90,7 @@ export class TaskSortFilterComponent implements OnInit {
     this.taskSortFilterService.setData(this.form.value);
   }
 
-  onEnter(){
+  onEnter() {
     this.taskSortFilterService.setData(this.form.value);
   }
 }

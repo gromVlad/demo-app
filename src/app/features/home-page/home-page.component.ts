@@ -12,11 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent implements OnInit {
-  private windowService = inject(WindowService);
-  private router = inject(Router);
+  private readonly router = inject(Router);
+
   dataNow!: Date;
-
-
   taskWindow!: boolean;
 
   ngOnInit(): void {
