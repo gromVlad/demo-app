@@ -5,6 +5,7 @@ import { AppStateInterface } from '../../store/selectors';
 import { CommonModule } from '@angular/common';
 import { createTaskAction } from '../../store/actions/addTask.actions';
 import { TaskInterface } from 'app/shared/model/task.model';
+import { GenerateUniqueId } from 'app/shared/utils/generateUniqueId.service';
 
 @Component({
   selector: 'app-task-form',
@@ -16,6 +17,7 @@ import { TaskInterface } from 'app/shared/model/task.model';
 export class TaskFormComponent {
   private fb = inject(FormBuilder);
   private store = inject(Store<AppStateInterface>);
+  private generateUniqueId = inject(GenerateUniqueId);
 
   taskForm!: FormGroup;
 
@@ -34,7 +36,7 @@ export class TaskFormComponent {
     if (this.taskForm.valid) {
       const task: TaskInterface = {
         ...this.taskForm.value,
-        id: new Date().getTime(),
+        id: this.generateUniqueId.getId(),
         priority: +this.taskForm.value['priority'],
         performers: this.taskForm.value['performers'].split(','),
         deadline: new Date(this.taskForm.value['deadline']),

@@ -12,7 +12,7 @@ export class TaskStatusSortPipe implements PipeTransform {
   ): TasksInterface {
     let copyTask = [...tasks];
 
-    if (!copyTask) {
+    if (!copyTask || !sortOrder) {
       return tasks;
     }
 

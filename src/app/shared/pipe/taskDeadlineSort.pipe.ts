@@ -8,11 +8,11 @@ import { TasksInterface } from 'app/features/tasks/model/tasks.model';
 export class TaskDeadlineSortPipe implements PipeTransform {
   transform(
     tasks: TasksInterface,
-    sortOrder: 'asc' | 'desc'
+    sortOrder?: 'asc' | 'desc'
   ): TasksInterface {
     let copyTask = [...tasks];
 
-    if (!copyTask) {
+    if (!copyTask || !sortOrder) {
       return copyTask;
     }
 

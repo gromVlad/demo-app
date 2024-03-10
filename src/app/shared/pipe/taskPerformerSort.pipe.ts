@@ -13,7 +13,7 @@ export class TaskPerformerSortPipe implements PipeTransform {
   ): TasksInterface {
     let copyTask = [...tasks]
 
-    if (!copyTask) {
+    if (!copyTask || !sortOrder) {
       return copyTask;
     }
 

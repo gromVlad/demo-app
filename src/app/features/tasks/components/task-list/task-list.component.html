@@ -16,7 +16,8 @@
           | taskDeadlineFilter : paramsFilterAndSortTasks.deadlineFilter
           | taskPerformerSort : paramsFilterAndSortTasks.performerSort
           | taskDeadlineSort : paramsFilterAndSortTasks.deadlineSort
-          | taskStatusSort: paramsFilterAndSortTasks.statusSort
+          | taskStatusSort: paramsFilterAndSortTasks.statusSort;
+          trackBy: trackById
       "
     >
       {{ task.title }} - {{ task.description }} - {{ task.deadline | date: 'dd/MM/yyyy' }} -

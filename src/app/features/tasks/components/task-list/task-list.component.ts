@@ -63,9 +63,6 @@ export class TaskListComponent implements OnInit, OnDestroy {
       .getData()
       .subscribe((data) => {
         this.paramsFilterAndSortTasks = data;
-        console.log('====================================');
-        console.log(data);
-        console.log('====================================');
       });
   }
 
@@ -79,5 +76,9 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsFilterAndSortSubject.unsubscribe();
+  }
+
+  trackById(task: any): string {
+    return task.id;
   }
 }
