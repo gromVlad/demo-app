@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppStateInterface } from '../../store/selectors';
@@ -6,22 +6,42 @@ import { CommonModule } from '@angular/common';
 import { createTaskAction } from '../../store/actions/addTask.actions';
 import { TaskInterface } from 'app/shared/model/task.model';
 import { GenerateUniqueId } from 'app/shared/utils/generateUniqueId.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { WindowService } from '../../services/windowService.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+  ],
   templateUrl: './task-form.component.html',
-  styleUrl: './task-form.component.scss',
+  styleUrls: ['./task-form.component.scss'],
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private store = inject(Store<AppStateInterface>);
   private generateUniqueId = inject(GenerateUniqueId);
+  private windowService = inject(WindowService);
+  private subscription!: Subscription;
 
+  taskWindow!: boolean
   taskForm!: FormGroup;
 
   ngOnInit(): void {
+    this.initializeValues();
+  }
+
+  initializeValues() {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: [''],
@@ -29,6 +49,9 @@ export class TaskFormComponent {
       priority: [1, Validators.min(1)],
       status: ['new'],
       performers: [''],
+    });
+    this.subscription = this.windowService.taskWindow$.subscribe((window) => {
+      this.taskWindow = window.createTask;
     });
   }
 
@@ -43,6 +66,15 @@ export class TaskFormComponent {
       };
 
       this.store.dispatch(createTaskAction({ task }));
+      this.closeTaskWindowForCreation();
     }
+  }
+
+  closeTaskWindowForCreation(): void {
+    this.windowService.closeTaskWindow();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,16 +1,29 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="status">Status:</label>
-    <select id="status" formControlName="status">
-      <option value="new">New</option>
-      <option value="in progress">In Progress</option>
-      <option value="completed">Completed</option>
-    </select>
-  </div>
-  <div>
-    <label for="performers">Performers:</label>
-    <input type="text" id="performers" formControlName="performers">
-  </div>
+<form
+  [formGroup]="taskForm"
+  (ngSubmit)="onSubmit()"
+  class="modal-form"
+  *ngIf="taskWindow"
+>
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Status:</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="new">New</mat-option>
+        <mat-option value="in progress">In Progress</mat-option>
+        <mat-option value="completed">Completed</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <button type="submit">Update Task</button>
+    <mat-form-field>
+      <mat-label>Performers:</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="performers"
+        id="performers"
+      />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Update Task</button>
+  </div>
 </form>

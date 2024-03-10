@@ -1,14 +1,20 @@
 <div *ngIf="isLoading$ | async">
-  <p>Loading...</p>
+  <app-spinner ></app-spinner>
 </div>
+
 
 <div *ngIf="error$ | async as error">
   <p>{{ error }}</p>
 </div>
 
-<div *ngIf="tasks$ | async as tasks">
-  <ul>
+<div *ngIf="tasks$ | async as tasks" class="box">
+  <button mat-raised-button class="button" (click)="openTaskWindowForCreation()">
+    <mat-icon>add</mat-icon>
+    Create task
+  </button>
+  <ul >
     <li
+    class="container"
       *ngFor="
         let task of tasks
           | taskStatusFilter : paramsFilterAndSortTasks.statusFilter
@@ -16,20 +22,31 @@
           | taskDeadlineFilter : paramsFilterAndSortTasks.deadlineFilter
           | taskPerformerSort : paramsFilterAndSortTasks.performerSort
           | taskDeadlineSort : paramsFilterAndSortTasks.deadlineSort
-          | taskStatusSort: paramsFilterAndSortTasks.statusSort;
-          trackBy: trackById
+          | taskStatusSort : paramsFilterAndSortTasks.statusSort;
+        trackBy: trackById
       "
     >
-      {{ task.title }} - {{ task.description }} - {{ task.deadline | date: 'dd/MM/yyyy' }} -
-      {{ task.priority }} - {{ task.status }} - {{ task.performers }}
-      <a [routerLink]="['/task', task.id]">View</a>
-      <button (click)="editTask(task)">Edit</button>
+      <h4 mat-line>{{ task.title }}</h4>
+      <p mat-line>{{ task.description }}</p>
+      <div class="info">
+        <p>
+          <mat-icon>event </mat-icon> {{ task.deadline | date : "dd/MM/yyyy" }}
+        </p>
+        <p><mat-icon>priority_high</mat-icon> {{ task.priority }}</p>
+        <p><mat-icon>task_alt</mat-icon> {{ task.status }}</p>
+        <p><mat-icon>people</mat-icon> {{ task.performers }}</p>
+      </div>
+      <hr>
+      <div mat-list-item-actions class="btn">
+        <button mat-icon-button (click)="editTask(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <a mat-button [routerLink]="['/tasks', task.id]">
+          <mat-icon>link</mat-icon>
+        </a>
+      </div>
     </li>
   </ul>
 </div>
 
-<app-task-edit
-  *ngIf="selectedTask"
-  [task]="selectedTask"
-  (taskEditClosed)="selectedTask = null"
-></app-task-edit>
+<app-task-edit *ngIf="selectedTask" [task]="selectedTask"></app-task-edit>

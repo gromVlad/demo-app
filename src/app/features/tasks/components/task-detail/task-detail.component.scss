@@ -1,0 +1,47 @@
+.task-detail__card {
+  margin:10px;
+  max-width: 600px;
+}
+
+.task-detail__body {
+  padding: 20px;
+  .box{
+    display: flex;
+    align-items: center;
+  }
+}
+
+.task-detail__deadline,
+.task-detail__priority,
+.task-detail__status,
+.task-detail__performers {
+  margin-bottom: 10px;
+}
+
+.task-detail__deadline mat-icon,
+.task-detail__priority mat-icon,
+.task-detail__status mat-icon,
+.task-detail__performers mat-icon {
+  margin-right: 10px;
+}
+
+.button {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10spx;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  background-color: #575252;
+}
+
+.btn{
+  margin: 10px;
+}

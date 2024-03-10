@@ -3,11 +3,22 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TaskSortFilterService } from '../../services/sortAndFilter.service';
 import { TaskSortFilterForm } from 'app/shared/model/taskSortFilterForm.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-task-sort-filter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './task-sort-filter.component.html',
   styleUrl: './task-sort-filter.component.scss',
 })
@@ -72,7 +83,15 @@ export class TaskSortFilterComponent implements OnInit {
       });
   }
 
-  onSubmit(): void {
+  onBlur() {
+    this.taskSortFilterService.setData(this.form.value);
+  }
+
+  onSelectionChange() {
+    this.taskSortFilterService.setData(this.form.value);
+  }
+
+  onEnter(){
     this.taskSortFilterService.setData(this.form.value);
   }
 }

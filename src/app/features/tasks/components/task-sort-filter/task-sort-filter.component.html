@@ -1,47 +1,51 @@
-<form [formGroup]="form">
-  <div>
-    <label for="status-filter">Filter by status:</label>
-    <select id="status-filter" formControlName="statusFilter">
-      <option *ngFor="let option of statusFilterOptions" [value]="option.value">
+<form [formGroup]="form" class="container">
+  <mat-form-field>
+    <mat-label>Filter by status:</mat-label>
+    <mat-select formControlName="statusFilter" (blur)="onBlur()" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let option of statusFilterOptions" [value]="option.value">
         {{ option.label }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label for="performer-input-filter">Filter by performer input:</label>
-    <input id="performer-input-filter" type="text" formControlName="performerInputFilter">
-  </div>
- <label for="deadline-filter">Filter by deadline:</label>
-    <select id="deadline-filter" formControlName="deadlineFilter">
-      <option *ngFor="let option of deadlineFilterOptions" [value]="option.value">
-        {{ option.label }}
-      </option>
-    </select>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <div>
-    <label for="status-sort">Sort by status:</label>
-    <select id="status-sort" formControlName="statusSort">
-      <option *ngFor="let option of statusSortOptions" [value]="option.value">
-        {{ option.label }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label for="performer-sort">Sort by performer:</label>
-    <select id="performer-sort" formControlName="performerSort">
-      <option *ngFor="let option of performerSortOptions" [value]="option.value">
-        {{ option.label }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label for="deadline-sort">Sort by deadline:</label>
-    <select id="deadline-sort" formControlName="deadlineSort">
-      <option *ngFor="let option of deadlineSortOptions" [value]="option.value">
-        {{ option.label }}
-      </option>
-    </select>
-  </div>
+  <mat-form-field>
+    <mat-label>Filter by performer input:</mat-label>
+    <input matInput formControlName="performerInputFilter" id="performer-input-filter" type="text" (blur)="onBlur()" (keyup.enter)="onEnter()">
+  </mat-form-field>
 
-  <button (click)="onSubmit()">Click</button>
+  <mat-form-field>
+    <mat-label>Filter by deadline:</mat-label>
+    <mat-select formControlName="deadlineFilter" (blur)="onBlur()" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let option of deadlineFilterOptions" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sort by status:</mat-label>
+    <mat-select formControlName="statusSort" (blur)="onBlur()" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let option of statusSortOptions" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sort by performer:</mat-label>
+    <mat-select formControlName="performerSort" (blur)="onBlur()" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let option of performerSortOptions" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sort by deadline:</mat-label>
+    <mat-select formControlName="deadlineSort" (blur)="onBlur()" (selectionChange)="onSelectionChange()">
+      <mat-option *ngFor="let option of deadlineSortOptions" [value]="option.value">
+        {{ option.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </form>

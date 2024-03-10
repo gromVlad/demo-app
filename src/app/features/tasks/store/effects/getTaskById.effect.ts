@@ -16,7 +16,7 @@ export class GetTaskByIdEffect {
       ofType(getTaskByIdAction),
       switchMap((action) =>
         this.storageService.getTaskById(action.id).pipe(
-          map((task: TaskInterface ) =>
+          map((task: TaskInterface ) => 
             getTaskByIdSuccessAction({ task })
           ),
           catchError(() => of(getTaskByIdFailureAction()))

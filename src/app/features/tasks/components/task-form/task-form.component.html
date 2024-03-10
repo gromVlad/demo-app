@@ -1,36 +1,57 @@
-<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="title">Title:</label>
-    <input type="text" id="title" formControlName="title">
-  </div>
-  <div>
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description"></textarea>
-  </div>
-  <div>
-    <label for="deadline">Deadline:</label>
-    <input type="date" id="deadline" formControlName="deadline">
-  </div>
-  <div>
-    <label for="priority">Priority:</label>
-    <select id="priority" formControlName="priority">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
-  </div>
-  <div>
-    <label for="status">Status:</label>
-    <select id="status" formControlName="status">
-      <option value="new">New</option>
-      <option value="in progress">In Progress</option>
-      <option value="completed">Completed</option>
-    </select>
-  </div>
-  <div>
-    <label for="performers">Performers:</label>
-    <input type="text" id="performers" formControlName="performers">
-  </div>
+  <form [formGroup]="taskForm" class="modal-form" *ngIf="taskWindow">
+    <mat-card class="container">
+      <mat-card-header>
+        <mat-card-title class="title">Create Task</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="container">
+        <mat-form-field>
+          <mat-label>Title:</mat-label>
+          <input type="text" matInput formControlName="title" />
+        </mat-form-field>
 
-  <button type="submit">Create Task</button>
-</form>
+        <mat-form-field>
+          <mat-label>Description:</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Deadline:</mat-label>
+          <input type="date" matInput formControlName="deadline" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Priority:</mat-label>
+          <mat-select formControlName="priority">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Status:</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="new">New</mat-option>
+            <mat-option value="in progress">In Progress</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Performers:</mat-label>
+          <input type="text" matInput formControlName="performers" />
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions class="container-btn">
+        <button type="submit" (click)="onSubmit()" mat-raised-button color="primary">
+          Create Task
+        </button>
+
+         <button type="submit" (click)="closeTaskWindowForCreation()" mat-raised-button color="primary">
+          Back
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+  </form>

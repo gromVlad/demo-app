@@ -18,7 +18,33 @@ export class StorageService {
     } else {
       // for test
       const tasks: TasksInterface = [
-        
+        {
+          id: 17100792398400,
+          title: 'Task 1',
+          description: 'Description for task 1',
+          deadline: new Date('2024-03-13'),
+          priority: 1,
+          status: 'new',
+          performers: ['Vlad'],
+        },
+        {
+          id: 17100792398401,
+          title: 'Task 2',
+          description: 'Description for task 2',
+          deadline: new Date('2024-03-12'),
+          priority: 2,
+          status: 'in progress',
+          performers: ['Jane Doe'],
+        },
+        {
+          id: 17100792398404,
+          title: 'Task 3',
+          description: 'Description for task 3',
+          deadline: new Date('2029-04-12'),
+          priority: 3,
+          status: 'completed',
+          performers: ['Sveta'],
+        },
       ];
 
       localStorage.setItem(this.tasksKey, JSON.stringify(tasks));

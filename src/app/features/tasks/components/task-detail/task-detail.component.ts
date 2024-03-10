@@ -1,22 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TaskInterface } from 'app/shared/model/task.model';
 import { Observable } from 'rxjs';
-import { AppStateInterface, taskSelector } from '../../store/selectors';
+import { AppStateInterface, errorSelector, isLoadingSelector, taskSelector } from '../../store/selectors';
 import { getTaskByIdAction } from '../../store/actions/getTaskById.actions';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { SpinnerComponent } from 'app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-task-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, SpinnerComponent],
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })
 export class TaskDetailComponent {
+  isLoading$!: Observable<boolean>;
+  error$!: Observable<string | null>;
   private store = inject(Store<AppStateInterface>);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   task$!: Observable<TaskInterface | null>;
 
@@ -26,7 +32,10 @@ export class TaskDetailComponent {
   }
 
   initializeValues(): void {
+    this.isLoading$ = this.store.select(isLoadingSelector);
+    this.error$ = this.store.select(errorSelector);
     this.task$ = this.store.select(taskSelector);
+    console.log(this.task$);
   }
 
   fetchData(): void {
@@ -34,5 +43,9 @@ export class TaskDetailComponent {
       const id = params['id'];
       this.store.dispatch(getTaskByIdAction({ id }));
     });
+  }
+
+  backTasks() {
+    this.router.navigateByUrl('/tasks');
   }
 }

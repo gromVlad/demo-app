@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="title">{{ getGreeting() }}</h1>
+  <p class="data">{{ dataNow | date }}</p>
+  <div class="btn">
+    <button
+      mat-raised-button
+      class="button"
+      (click)="openTaskWindowForCreation()"
+    >
+      <mat-icon>add</mat-icon>
+      <span>Create task</span>
+    </button>
+  </div>
+</div>

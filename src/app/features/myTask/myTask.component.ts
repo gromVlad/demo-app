@@ -12,9 +12,8 @@ import { TaskSortFilterComponent } from 'app/features/tasks/components/task-sort
     TaskListComponent,
     TaskFormComponent,
     TaskSortFilterComponent,
-    
   ],
-  templateUrl: './demo.component.html',
-  styleUrl: './demo.component.scss',
+  templateUrl: './myTask.component.html',
+  styleUrl: './myTask.component.scss',
 })
-export class DemoComponent {}
+export class MyTaskComponent {}
