@@ -15,9 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/demo-app",
           "options": {
-            "outputPath": "dist/clone-medium-angular",
+            "outputPath": "dist/demo-apps",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -96,6 +96,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
